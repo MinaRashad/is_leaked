@@ -9,3 +9,4 @@ run the following command
     
     
 ## Then it is pretty easy to use
+<img src='./preview/preview.gif'>
