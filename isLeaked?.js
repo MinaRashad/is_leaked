@@ -63,41 +63,35 @@ function searchIn(DB){
     console.log('[*] Finished Reading ' +DB)
 
     var targetFound = false
-    var targetPass = ''
-    for(let i=0;i<DBArr.length;i++){
+    var targetEntry = ''
+    for(let i=0;i < DBArr.length;i++){
         if(i%Math.round(DBArr.length*0.001)==0){
 
             console.log(`[*] Scanned ${Math.round((i/DBArr.length)*100)}% of ${DB}`)
 
         }
         let entry = DBArr[i].split(':')
-        if(entry[0] == target)
+        //if there were many things
+        for(let j=0; j < entry.length; j++)
+        if(entry[j] == target)
         {
             console.log('[+] Target was found')
             console.log(DBArr[i])
-            targetPass = entry[1]
-            targetFound = true
-            break;
-
-        }else if(entry[1] == target)
-        {
-            console.log('[+] Target was found')
-            console.log(DBArr[i])
-            targetPass = entry[0]
+            targetEntry = DBArr[i]
             targetFound = true
             break;
 
         }
     }
-    theExit(targetFound,targetPass)
+    theExit(targetFound,targetEntry)
 }
-function theExit(isTargetFound,pass)
+function theExit(isTargetFound,entry)
 {
 
     if(isTargetFound)
     {
         console.log('\n\n##########\nTarget was found in the Database')
-        console.log(`${target}  :   ${pass}`)
+        console.log(entry)
     }
     else{
         console.log('\n\n##########\nTarget was not found in the database')
