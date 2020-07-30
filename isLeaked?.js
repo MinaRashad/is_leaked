@@ -25,7 +25,7 @@ function getTarget(){
     while(!targetIsCorrect)
     {
     target = prompt('Write your target:. ')
-    var targetIsCorrect = prompt(`is this email right "${target}" (y/n):`).toLowerCase()[0]=='y'?true:false
+    var targetIsCorrect = prompt(`is this right "${target}" (y/n):`).toLowerCase()[0]=='y'?true:false
     }
 }
 
