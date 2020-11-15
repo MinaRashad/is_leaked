@@ -58,32 +58,18 @@ function choosenDB(){
     searchIn(DB)
 }
 function searchIn(DB){
-    DBStr = fs.readFileSync(`./DB/${DB}`).toString()
-    DBArr = DBStr.split('\n')
+    DBStr = fs.readFileSync(`./DB/${DB}`)
     console.log('[*] Finished Reading ' +DB)
-
     var targetFound = false
-    var targetEntry = ''
-    for(let i=0;i < DBArr.length;i++){
-        if(i%Math.round(DBArr.length*0.001)==0){
+    startIndex = DBStr.indexOf(target)
+    if(startIndex==-1){theExit(false,target);return 0;}
+    console.log('[+] Target was found')
+    DBStr = DBStr.slice(startIndex)
+    endIndex = DBStr.indexOf('\n')
+    DBStr = DBStr.slice(0,endIndex)
+    
 
-            console.log(`[*] Scanned ${Math.round((i/DBArr.length)*100)}% of ${DB}`)
-
-        }
-        let entry = DBArr[i].split(':')
-        //if there were many things
-        for(let j=0; j < entry.length; j++)
-        if(entry[j] == target)
-        {
-            console.log('[+] Target was found')
-            console.log(DBArr[i])
-            targetEntry = DBArr[i]
-            targetFound = true
-            break;
-
-        }
-    }
-    theExit(targetFound,targetEntry)
+    theExit(true,DBStr.toString())
 }
 function theExit(isTargetFound,entry)
 {
